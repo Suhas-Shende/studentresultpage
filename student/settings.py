@@ -18,6 +18,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 import os
 import django_heroku
+from decouple import config
 import dj_database_url
 django_heroku.settings(locals())
 # Quick-start development settings - unsuitable for production
