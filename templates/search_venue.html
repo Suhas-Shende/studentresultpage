@@ -1,0 +1,163 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <style>
+        table, th, td {
+          border:1px solid black;
+          border-collapse: collapse;
+          
+        }
+        /* footer,div{
+            padding-left: 30px;
+            margin:20px;
+        } */
+        header{
+            padding-right: 30px;
+            margin:10px;
+            float:right;
+        }
+        div.d{
+						 margin-right: 40px;
+                         float:left;
+
+					 }
+
+        h2{
+          text-align: center;
+          color: rgb(0, 255, 170);
+          border: 1px;
+          border-color: brown;
+          box-sizing: border-box;
+          background-color: blue;
+        }
+
+        </style>
+    <title>studentrecord</title>
+</head>
+<body>
+    {% for message in messages %}
+      <div class="alert alert-success alert-dismissible">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <strong>Success!</strong> {{message}}
+      </div>
+    {% endfor %}
+    <h2>Student Record</h2>
+    <header>
+        <div>
+         
+        <td>	 
+            <div class="d"></div>	
+                
+                <tr> 
+                    <a href="{% url 'update_venues' %}" class="btn btn-success">Create</a> 
+           
+
+                <tr> 
+                    <a href="{% url 'home' %}" class="btn btn-secondary">Studentpage </a>
+ 
+                </tr>
+                <tr>
+                <span class="hello-msg">Hello, {{request.user}}</span>
+                <span><a  class="hello-msg" href="{% url 'password_change' %}">Changepassword</a></span>
+                <span ><a  class="hello-msg" href="{% url 'logoutt' %}">Logout</a></span>
+                </tr> 
+            </div>
+          
+            
+        </td>
+        </div>
+        <!-- {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                <li  {% if message.tags %} class=" {{ message.tags }} " {% endif %}> {{ message }} </li>
+                {% endfor %}
+            </ul>
+        {% endif %} -->
+    </header>
+        <footer> <div>
+            <table class="table table-hover" style="height:300px; overflow-y:scroll; border-bottom:2px blue solid;">
+                <thead >
+                  <tr >
+                    <th width="8%" scope="col">sr</th>
+
+                    <th width="8%" height="2%" scope="col">ID</th>
+                    <th width="8%" height="1%" scope="col">Registration NO.</th>
+                    <th width="8%" height="2%" scope="col">Name</th>
+                    <th width="8%" height="2%" scope="col">Subject</th>
+                    <th width="6%" height="2%" scope="col">Mark</th>
+                    <th width="6%" height="2%" scope="col">Date</th>
+                    <th width="6%" height="2%"  scope="col">Delete/Edit</th>
+                  </tr>
+                </thead>
+                 <tbody>
+                  {% for data in studs %}
+                  <tr >
+                    <th scope="row">{{  forloop.counter }}</th>
+                    <td>{{data.id}}</td>
+                    <td>{{data.reg}}</td>
+                    <td >{{data.name}}</td>
+                    <td >{{data.subject}}</td>
+                    <td >{{data.mark}}</td>
+                    <td >{{data.date}}</td>
+                    <td >
+                        
+                           <span><a href=" {% url 'delete_venue' data.reg  %} " class="btn btn-danger">Delete</a></span>
+                           <span><a href="{% url 'edit_venue'  data.id %}" class="btn btn-primary">Edit</a></span>
+                           
+                       
+                       
+                      </td>
+                  </tr>
+                   {% endfor %}
+                </tbody>
+                </table>
+            </div>
+            
+
+
+
+            
+        
+        <nav aria-label="Page navigation example text-center">
+        {% if studs.has_other_pages %}
+          <ul class="pagination">
+            {% if studs.has_previous %}
+              <li class="page-item"><a class="page-link" href="?page={{ studs.previous_page_number }}">&laquo;</a></li>
+            {% else %}
+              <li class="disabled page-item"><span class="page-link">&laquo;</span></li>
+            {% endif %}
+            {% for i in studs.paginator.page_range %}
+              {% if studs.number == i %}
+                <li class="page-item active"><span class="page-link">{{ i }} <span class="sr-only">(current)</span></span></li>
+              {% else %}
+                <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+              {% endif %}
+            {% endfor %}
+            {% if studs.has_next %}
+              <li class="page-item"><a class="page-link" href="?page={{ studs.next_page_number }}">&raquo;</a></li>
+            {% else %}
+              <li class="page-item disabled"><span>&raquo;</span></li>
+            {% endif %}
+          </ul>
+        {% endif %}
+        </nav> 
+            </div>
+            </div>
+            </div>
+            <!-- Optional JavaScript -->
+            <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+            <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+</html>

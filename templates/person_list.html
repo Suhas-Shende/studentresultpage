@@ -1,0 +1,75 @@
+
+{% extends "record.html" %}
+
+ {% block content %}
+    <!DOCTYPE html>
+<html lang="en">
+   
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+     footer,div{
+         padding-left: 50px;
+     }
+     footer,div,h1{
+         color: blueviolet;
+     }
+     footer,div,h3{
+         color:rgb(8, 8, 7);
+     }
+     footer{
+         border-radius:40px;
+         background-color: aliceblue;
+         border-width: 100px;
+         width: 325px;
+         height: 325px;
+         margin-left: 100px;
+         margin-top: 40px;
+     }
+
+
+
+    </style>
+</head>
+<body>
+   
+    <footer> 
+       
+        <div>
+  
+        {% if searched %} 
+           <h1>Result:</h1>
+               
+                {% for Person in person_list %}
+                <ol>
+                    <li><h3>ID :{{Person.id}}</h3></li> 
+                    <li><h3>Reg.No. :{{Person.reg}}</h3></li> 
+                    <li><h3>Name :{{ Person.name}}</h3></li>
+                    <li> <h3>Subjet: {{ Person.subject}}</h3></li>
+                    <li><h3>Mark :{{ Person.mark}}</h3></li>
+                </ol>
+                 <!-- <span> <a href="{% url 'edit_venue'  Person.id  %}">edit</a></span> -->
+            {% endfor %}
+            
+        {% endif %}
+        
+
+            <tr> 
+                <a href="{% url 'home' %}" class="btn btn-secondary">home </a>
+
+            </tr>
+        
+                
+            
+    </div>
+  
+</footer>  
+
+ 
+</body>
+{% endblock %}
+</html>

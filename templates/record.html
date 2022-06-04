@@ -1,0 +1,173 @@
+
+
+				<!DOCTYPE html>
+				<html lang="en">
+				<head>
+					<meta charset="UTF-8">
+					<meta http-equiv="X-UA-Compatible" content="IE=edge">
+					<meta name="viewport" content="width=device-width, initial-scale=1.0">
+					<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+                    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+					<title>getresult</title>
+					<style>
+				    body{
+						background-color: cornflowerblue;
+					}
+					h2{
+						color: red;
+					}
+					header,form,h3{
+						color:black;
+					}
+                     div.c{
+                     padding-left: 50px;
+					 
+					 }
+					 div.s{
+                     padding-left: 50px;
+					 float:left;
+                     
+					 }
+					 header,div{
+						 padding-left: 50px;
+						 
+						 
+						
+					 }
+					 div.searchbox {
+						   padding-top:50px;
+					 }
+					 button:hover{
+						 background-color: gold;
+					 }
+					 /* div.logout{
+						 float: left;
+						 padding-left: 1000px;
+						 background-color: red;
+					 } */
+					 body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.topnav {
+  overflow: hidden;
+  background-color: #333;
+}
+
+.topnav a {
+  float: right;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+.topnav span {
+  float: right;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+
+.topnav a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.topnav a.active {
+  background-color: #04AA6D;
+  color: white;
+}
+div.t{
+	float:left;
+	padding-left: 100px;
+	padding-top: 10px;
+	
+}	
+div,h4{
+	color:rgb(247, 0, 255);
+}		 
+					</style>
+				</head>
+				<body>
+					
+					<div class="topnav">
+					
+						<span class="hello-msg">Hello, {{request.user}}</span>
+						<a  class="hello-msg" href="{% url 'logout' %}">Logout</a>
+						<a  class="hello-msg" href="{% url 'password_change' %}">Changepassword</a>
+						{% if group %}
+						     <a  class="hello-msg" href="{% url 'search-venues' %}">Back</a>
+					   
+						{% endif %}
+					</div>
+					<div class="clearfix"></div>
+					<div class="t">
+						{% if group %}
+							<h4>WELCOME {{request.user}}</h4>
+					   
+						{% endif %}
+				    </div> 
+					<header>
+					<div class="searchbox">
+						
+					<h2>Search Result Here..</h2>
+					
+					<form method = POST action="{% url 'view_persons' %}">
+						{% csrf_token %}
+					<input type="search" class="sea" placeholder="Search" aria-label="search" name='searched'>
+					<button type="submit">search</button>
+				    <h3>Please enter your Registration No.</h3>
+				    </form></div>
+					<div class="f">
+						
+					</div>
+					
+					<!-- <div class="c">
+
+					    <td>
+						
+							<li><a href="{% url 'update_venues' %}">update student record</a></li>
+
+
+
+							
+						</td>
+					    </div>
+						<div class="s">
+
+							<td>
+							
+								<li><a href="{% url 'search-venues' %}">show all student record </a></li>
+	                             
+	
+	
+								
+							</td>
+						
+								
+							</div>
+						 </div> -->
+						
+						
+						
+						</header>
+						
+					{% block content %}
+					{% endblock %}
+						
+					
+				
+				
+					
+				</body>
+				</html>
+				
+        
+    	
+    	
+
