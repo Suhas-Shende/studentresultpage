@@ -1,2 +1,2 @@
-web:gunicorn student.wsgi --log-file -
+web:gunicorn student.wsgi
    
